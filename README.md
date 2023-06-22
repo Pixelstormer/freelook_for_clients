@@ -2,6 +2,8 @@
 
 A client-side mod for [Quilt](https://quiltmc.org) and [Fabric](https://fabricmc.net/) that adds a freelook keybind, allowing you to observe your surroundings without turning your character.
 
+This is NOT a freecam mod! Freecam lets you detach your camera from your player and move it around as though you were in spectator mode, whereas freelook only serves to decouple the direction you're looking from the direction you're aiming.
+
 ## Comparison to other freelook mods
 
 As of writing, I could find two other freelook mods for Fabric/Quilt on Modrinth. The following table compares the features of these mods with each other and this mod:
