@@ -34,14 +34,16 @@ public abstract class MouseMixin {
 				self.changeLookDirection(cursorDeltaX, cursorDeltaY);
 				// Interpolate to original orientation - instead of instantly snapping back - to
 				// avoid disorienting the player
-				freelooker.setFreelookPitch(MathHelper.lerp(0.3f, freelooker.getFreelookPitch(), self.getPitch()));
-				freelooker.setFreelookYaw(MathHelper.lerp(0.3f, freelooker.getFreelookYaw(), self.getYaw()));
+				float lerpedPitch = MathHelper.lerpAngleDegrees(0.3f, freelooker.getFreelookPitch(), self.getPitch());
+				float lerpedYaw = MathHelper.lerpAngleDegrees(0.3f, freelooker.getFreelookYaw(), self.getYaw());
+				freelooker.setFreelookPitch(lerpedPitch);
+				freelooker.setFreelookYaw(lerpedYaw);
 
 				// Cut off interpolation once it's close enough to original orientation
 				float pitchDiff = Math.abs(self.getPitch() - freelooker.getFreelookPitch());
 				float yawDiff = Math.abs(self.getYaw() - freelooker.getFreelookYaw());
 
-				if ((pitchDiff * pitchDiff) + (yawDiff * yawDiff) <= 0.02) {
+				if ((pitchDiff * pitchDiff) + (yawDiff * yawDiff) <= 0.02f) {
 					freelooker.setFreelookState(FreelookState.NotFreelooking);
 				}
 				break;

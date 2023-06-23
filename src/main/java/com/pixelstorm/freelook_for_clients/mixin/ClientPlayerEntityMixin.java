@@ -29,18 +29,18 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
 
 	@Inject(method = "<init>*", at = @At("RETURN"))
 	private void onConstruct(CallbackInfo ci) {
-		freelookPitch = 0;
-		freelookYaw = 0;
+		freelookPitch = 0f;
+		freelookYaw = 0f;
 		freelookState = FreelookState.NotFreelooking;
 	}
 
 	@Override
 	public void changeFreelookDirection(double cursorDeltaX, double cursorDeltaY) {
 		// Copied from Entity::changeLookDirection
-		float pitchDelta = (float) cursorDeltaY * 0.15F;
-		this.setFreelookPitch(MathHelper.clamp(this.getFreelookPitch() + pitchDelta, -90.0F, 90.0F));
+		float pitchDelta = (float) cursorDeltaY * 0.15f;
+		this.setFreelookPitch(MathHelper.clamp(this.getFreelookPitch() + pitchDelta, -90f, 90f));
 
-		float yawDelta = (float) cursorDeltaX * 0.15F;
+		float yawDelta = (float) cursorDeltaX * 0.15f;
 		this.setFreelookYaw(this.getFreelookYaw() + yawDelta);
 	}
 

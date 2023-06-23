@@ -32,7 +32,7 @@ public abstract class GameRendererMixin {
 			float pitchDiff = freelooker.getFreelookPitch() - entity.getPitch(tickDelta);
 			float yawDiff = freelooker.getFreelookYaw() - entity.getYaw(tickDelta);
 
-			Vector3f positive_y = new Vector3f(0.0f, 1.0f, 0.0f);
+			Vector3f positive_y = new Vector3f(0f, 1f, 0f);
 			Vector3f positive_y_local = positive_y
 					.rotateX(freelooker.getFreelookPitch() * MathConstants.RADIANS_PER_DEGREE);
 
