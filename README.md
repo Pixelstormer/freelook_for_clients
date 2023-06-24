@@ -10,7 +10,7 @@ As of writing, I could find two other freelook mods for Fabric/Quilt on Modrinth
 
 |   | [Freelook](https://modrinth.com/mod/freelook) | [Perspektive](https://modrinth.com/mod/perspektive) | Freelook For Clients |
 | - | - | - | - |
-| Minecraft version support | 1.19.4 only | 1.17+ | TBD |
+| Minecraft version support | 1.19.4 only | 1.17 onwards | 1.18.2 onwards (Excluding 1.19 & 1.19.1) |
 | Choose between toggle or hold controls | Via config | Via keybinds | Via keybinds |
 | Third person support | Via config, interacts unintuitively with vanilla controls | Over-the-shoulder only: No support for first-person or looking-at-camera | Via vanilla controls |
 | Interpolation to prevent disorientation | No | No | Yes |
