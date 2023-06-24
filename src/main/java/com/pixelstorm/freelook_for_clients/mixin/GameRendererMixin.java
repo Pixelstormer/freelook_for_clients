@@ -14,7 +14,6 @@ import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.Axis;
 import net.minecraft.util.math.MathConstants;
 
 @Mixin(GameRenderer.class)
@@ -29,16 +28,17 @@ public abstract class GameRendererMixin {
 			// Rotate the player hand/held item so it appears to remain fixed in space while
 			// freelooking, to emphasise that the player is freelooking, and thus the aim
 			// vector for clicking on stuff is fixed
-			float pitchDiff = freelooker.getFreelookPitch() - entity.getPitch(tickDelta);
-			float yawDiff = freelooker.getFreelookYaw() - entity.getYaw(tickDelta);
+			float yawDiff = (freelooker.getFreelookYaw() - entity.getYaw(tickDelta))
+					* MathConstants.RADIANS_PER_DEGREE;
 
-			Vector3f positive_y = new Vector3f(0f, 1f, 0f);
-			Vector3f positive_y_local = positive_y
+			float pitchDiff = (freelooker.getFreelookPitch() - entity.getPitch(tickDelta))
+					* MathConstants.RADIANS_PER_DEGREE;
+
+			Vector3f camera_local_up = new Vector3f(0f, 1f, 0f)
 					.rotateX(freelooker.getFreelookPitch() * MathConstants.RADIANS_PER_DEGREE);
 
-			matrices.multiply(
-					new Quaternionf().rotationAxis(yawDiff * MathConstants.RADIANS_PER_DEGREE, positive_y_local));
-			matrices.multiply(Axis.X_POSITIVE.rotationDegrees(pitchDiff));
+			matrices.multiply(new Quaternionf().rotationAxis(yawDiff, camera_local_up));
+			matrices.multiply(new Quaternionf().rotationX(pitchDiff));
 		}
 	}
 }
