@@ -7,6 +7,14 @@ base.archivesName = project.archives_base_name
 version = "$project.version+$project.minecraft_version-$project.loader"
 group = project.maven_group
 
+configurations.all {
+    resolutionStrategy.dependencySubstitution {
+        substitute(module("org.quiltmc.unpick:unpick-cli:2.2.0"))
+            .using(module("net.fabricmc.unpick:unpick-cli:2.3.0"))
+            .because("https://discord.com/channels/817576132726620200/847158056876900412/1043389986927562842")
+    }
+}
+
 repositories {
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because

@@ -12,7 +12,7 @@ import com.pixelstorm.freelook_for_clients.FreelookState;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.MathHelper;
 
 // Holds state for freelooking to communicate between other mixins
@@ -72,9 +72,9 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
 	@Override
 	public void setFreelookState(FreelookState state) {
 		if (!this.freelookState.isFreelooking() && state.isFreelooking()) {
-			this.sendMessage(Text.translatable("message.freelook_for_clients.enabled"), true);
+			this.sendMessage(new TranslatableText("message.freelook_for_clients.enabled"), true);
 		} else if (this.freelookState.isFreelooking() && !state.isFreelooking()) {
-			this.sendMessage(Text.translatable("message.freelook_for_clients.disabled"), true);
+			this.sendMessage(new TranslatableText("message.freelook_for_clients.disabled"), true);
 		}
 		this.freelookState = state;
 	}

@@ -1,7 +1,5 @@
 package com.pixelstorm.freelook_for_clients.mixin;
 
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,7 +12,8 @@ import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathConstants;
+import net.minecraft.util.math.Quaternion;
+import net.minecraft.util.math.Vec3f;
 
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
@@ -28,17 +27,14 @@ public abstract class GameRendererMixin {
 			// Rotate the player hand/held item so it appears to remain fixed in space while
 			// freelooking, to emphasise that the player is freelooking, and thus the aim
 			// vector for clicking on stuff is fixed
-			float yawDiff = (freelooker.getFreelookYaw() - entity.getYaw(tickDelta))
-					* MathConstants.RADIANS_PER_DEGREE;
+			float yawDiff = freelooker.getFreelookYaw() - entity.getYaw(tickDelta);
+			float pitchDiff = freelooker.getFreelookPitch() - entity.getPitch(tickDelta);
 
-			float pitchDiff = (freelooker.getFreelookPitch() - entity.getPitch(tickDelta))
-					* MathConstants.RADIANS_PER_DEGREE;
+			Vec3f camera_local_up = Vec3f.POSITIVE_Y.copy();
+			camera_local_up.rotate(new Quaternion(Vec3f.POSITIVE_X, freelooker.getFreelookPitch(), true));
 
-			Vector3f camera_local_up = new Vector3f(0f, 1f, 0f)
-					.rotateX(freelooker.getFreelookPitch() * MathConstants.RADIANS_PER_DEGREE);
-
-			matrices.multiply(new Quaternionf().rotationAxis(yawDiff, camera_local_up));
-			matrices.multiply(new Quaternionf().rotationX(pitchDiff));
+			matrices.multiply(new Quaternion(camera_local_up, yawDiff, true));
+			matrices.multiply(new Quaternion(Vec3f.POSITIVE_X, pitchDiff, true));
 		}
 	}
 }
