@@ -14,7 +14,7 @@ import net.minecraft.util.math.MathHelper;
 
 @Mixin(Mouse.class)
 public abstract class MouseMixin {
-	@Redirect(method = "updateLookDirection", at = @At(value = "INVOKE", target = "net/minecraft/client/network/ClientPlayerEntity.changeLookDirection(DD)V"))
+	@Redirect(method = "updateMouse", at = @At(value = "INVOKE", target = "net/minecraft/client/network/ClientPlayerEntity.changeLookDirection(DD)V"))
 	private void changeFreelookDirection(ClientPlayerEntity self, double cursorDeltaX, double cursorDeltaY) {
 		// Handle mouse movement, keybinds and starting/stopping freelooking
 		CanFreelook freelooker = (CanFreelook) self;

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "freelook_for_clients",
+  "version": "${version}",
+  "name": "Freelook For Clients",
+  "description": "A client-side mod that adds a freelook keybind, allowing you to observe your surroundings without turning your character.",
+  "authors": [
+    "Pixelstorm"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/freelook-for-clients",
+    "issues": "https://github.com/Pixelstormer/freelook_for_clients/issues",
+    "sources": "https://github.com/Pixelstormer/freelook_for_clients/tree/fabric-root"
+  },
+  "license": "Apache-2.0",
+  "icon": "assets/freelook_for_clients/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.pixelstorm.freelook_for_clients.FreelookForClients"
+    ]
+  },
+  "mixins": [
+    "freelook_for_clients.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "fabric-api": "*",
+    "minecraft": ">=1.19.3"
+  }
+}
