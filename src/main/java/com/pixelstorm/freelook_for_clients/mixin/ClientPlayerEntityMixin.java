@@ -12,6 +12,7 @@ import com.pixelstorm.freelook_for_clients.FreelookState;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.network.encryption.PlayerPublicKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 
@@ -22,8 +23,8 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
 	private float freelookYaw;
 	private FreelookState freelookState;
 
-	public ClientPlayerEntityMixin(ClientWorld world, GameProfile profile) {
-		super(world, profile);
+	public ClientPlayerEntityMixin(ClientWorld world, GameProfile profile, PlayerPublicKey playerPublicKey) {
+		super(world, profile, playerPublicKey);
 		throw new AssertionError();
 	}
 
